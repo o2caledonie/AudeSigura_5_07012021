@@ -62,7 +62,7 @@ function buildTeddyCard(teddy) {
                             <p class="description">${teddy.description}</p>
                             <div>Prix: <span class="price">${(teddy.price/100).toFixed(2) + " €"}</span></div>
                             </div>
-                            <a href="produit.html?id=${teddy._id}" class="btn btn-primary">Rencontrez ${teddy.name} !</a>
+                            <a href="product.html?id=${teddy._id}" class="btn btn-secondary">Rencontrez ${teddy.name} !</a>
                         </div></span>`;
     return newElt;  
 }
