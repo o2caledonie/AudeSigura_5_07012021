@@ -1,2 +1,12 @@
 @import "variable_overrides";
-@import "../node_modules/bootstrap/scss/bootstrap.scss"
+@import "card_overrides";
+@import "buttons_overrides";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+body{
+    font-family: 'Raleway', sans-serif;
+}
+.jumbotron{
+    margin: 2em 0;
+}
+
