@@ -62,17 +62,20 @@ function buildTeddyPage(teddy) {
             quantity : 1,
         };
         console.log(teddyChoosen);
-
-        
+    
         let storedTeddies = JSON.parse(localStorage.getItem('storedTeddies'))
         console.log(storedTeddies)
         if (storedTeddies == null) {
-            storedTeddies = []
+            storedTeddies = []          
         } 
         storedTeddies.push(teddyChoosen)
         localStorage.setItem('storedTeddies', JSON.stringify(storedTeddies))
+        if (window.confirm(teddy.name + " " + colorChoosen + ' a bien été ajouté. Souhaitez-vous consulter votre panier ?')) { 
+            window.location.href = "panier.html";
+        } else {
+            window.location.href = "index.html";
+        }
         console.log(storedTeddies)
-    
         
     })
     return newElt;  
