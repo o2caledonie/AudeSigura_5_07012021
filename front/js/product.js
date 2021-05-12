@@ -17,21 +17,11 @@ function fetchTeddy() {
     .then(teddy => {
         console.log(teddy);
         let newElt = buildTeddyPage(teddy);
-        console.log(buildTeddyPage(teddy));
+        console.log(newElt);
         let elt = document.getElementById('teddy');
         elt.appendChild(newElt);  
-        
-        const colors = teddy.colors;
-        console.log(colors)
-        for (let i of colors) {
-            let color = customTeddy(i);
-            console.log(customTeddy(i));
-            let opt = document.getElementsByClassName('custom-select');
-            opt.appendChild(color);
-        }
     })
 
-    
     .catch(error => {
         console.log(error);
         document.getElementById('erreur').innerHTML = "Erreur lors de la récupération des données :("
@@ -50,25 +40,65 @@ function buildTeddyPage(teddy) {
     <form>
         <div class="custom">
             <label for ="Choix de couleurs pour ${teddy.name}">Choisissez sa couleur :</label> 
-            <select class="custom-select"></select>
+            <select id ="select-color" class="custom-select">${customTeddy(teddy)}</select>
             </div>
     </form>
-    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+    <button id="add-cart" type="button" class="btn btn-secondary">Ajouter au panier</button>
     </div>`;
+
+    // Récupération des données et envoi au panier
+    const button = newElt.querySelector("#add-cart")
+    console.log(button)
+    button.addEventListener("click", function (event){
+        event.preventDefault();
+
+        let colorChoosen = newElt.querySelector("#select-color").value
+        console.log(colorChoosen)
+        let teddyChoosen = {
+            teddyName : teddy.name,
+            teddyId : teddy._id,
+            teddyColor : colorChoosen,
+            teddyPrice : teddy.price,
+            quantity : 1,
+        };
+        console.log(teddyChoosen);
+
+        
+        let storedTeddies = JSON.parse(localStorage.getItem('storedTeddies'))
+        console.log(storedTeddies)
+        if (storedTeddies == null) {
+            storedTeddies = []
+        } 
+        storedTeddies.push(teddyChoosen)
+        localStorage.setItem('storedTeddies', JSON.stringify(storedTeddies))
+        console.log(storedTeddies)
+    
+        
+    })
     return newElt;  
 }
 
+
 // options de customisation
-function customTeddy(i) {
-    const newOpt = document.createElement("option");
-    newOpt.innerHTML = `${teddy.colors}`
-    return newOpt
+function customTeddy(teddy) {
+    const colors = teddy.colors;
+        console.log(colors)
+        console.log(colors.length)
+    let custom = ``;
+        for(let color of colors){
+        console.log(color) 
+        const newOpt = `<option value="${color}">${color}</option>`
+        console.log (newOpt)
+        custom = custom + newOpt;  
+        }
+        
+    return custom;   
 }
     
+// Ajout Panier
+function ajoutPanier(a, b, c) {
+    console.log(a, b, c)
+}
 
 
-/* <option selected="tan">Brun</option>
-    <option value="chocolate">Chocolat</option>
-    <option value="black">Noir</option>
-    <option value="white">Blanc</option> */
 fetchTeddy();
