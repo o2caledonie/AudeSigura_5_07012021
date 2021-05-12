@@ -1,28 +1,3 @@
-// const img = document.getElementsByClassName("card-img-top");
-// const title = document.getElementsByClassName("name");
-// const description = document.getElementsByClassName("description");
-// const price = document.getElementsByClassName("price");
-
-// fetch("http://localhost:3000/api/teddies")
-// .then(res => {
-//     res.json().then(data => {
-//         console.log(img)
-//         img[0].src = data[0].imageUrl
-//         console.log(data[0].name)
-//         title[0].innerHTML = (data[0].name)
-//         console.log(data[0].description)
-//         description[0].innerHTML = (data[0].description)
-//         console.log(data[0].price)
-//         price[0].innerHTML = (data[0].price/100).toFixed(2) + " €"
-
-//     })     
-// })
-// .catch(error => {
-//     console.log(error)
-//     document.getElementById('erreur').innerHTML = "Erreur lors de la récupération des données :("
-// })
-
-
 
 // Récupération des données + boucle
 function fetchTeddies() {
@@ -62,7 +37,7 @@ function buildTeddyCard(teddy) {
                             <p class="description">${teddy.description}</p>
                             <div>Prix: <span class="price">${(teddy.price/100).toFixed(2) + " €"}</span></div>
                             </div>
-                            <a href="product.html?id=${teddy._id}" class="btn btn-secondary">Rencontrez ${teddy.name} !</a>
+                            <a href="product.html?id=${teddy._id}" class="btn btn-secondary mt-3">Rencontrez ${teddy.name} !</a>
                         </div></span>`;
     return newElt;  
 }

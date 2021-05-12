@@ -9,6 +9,41 @@ body{
     .jumbotron{
     margin: 2em 0;
     }
+
+    .btn{
+        transform: scale(1);
+        transition: transform 200ms ease-in-out;
+     
+        &:hover {
+            transform: scale(1.1);
+          }
+
+    }
+
+    #cart {
+
+        .teddy-item{
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1em;
+    
+            .teddy-price{
+                display:flex;
+                align-items: center;
+    
+                .btn-trash-teddy{
+                    color: $secondary;
+                    padding : .5em;
+                    background-color: transparent;   
+            
+                }
+            }
+    
+        }
+
+    }
+    
         
 }
 

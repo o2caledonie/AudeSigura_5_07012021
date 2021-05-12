@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Achetez d'adorables oursons à personnaliser et faits main !">
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <script src="js/cart.js" defer></script>
+    <title>Orinoco : oursons à personnaliser</title>
+</head>
+<body>
+
+  <div class="bg-primary">
+    <div class="container">
+      <div class="row">
+        <nav class="col navbar navbar-expand-lg navbar-light">
+          <a class="navbar-brand" href="index.html">
+            <img src="./img/orinoco_logo.PNG" width="100" alt="Orinoco Logo" />
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="navbarContent" class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="index.html">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cart.html">Panier</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+    <div class="container">
+      <main>
+        <div class="jumbotron text-center">
+          <h1 class="display-4">Orinoco</h1>
+          <h2 class="display-5">Récapitulatif de votre panier</h1>
+        </div>
+        <p id="erreur"></p>
+        <div id="cart" class="card">
+          <h5 class="card-title mt-3 text-center">Vos oursons :</h5>
+          <div id="teddy-list" class="col-9">
+            <div class="teddy-item">
+              <div class = "teddy-details">Nestor, Tan</div>
+              <div class = "teddy-price">29 euros
+                <button class = "btn btn-trash-teddy" title = "Supprimer cet ourson ?">
+                  <i class = "fas fa-trash-alt" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+            <div class="teddy-item">
+              <div class = "teddy-details">Nestor, Tan</div>
+              <div class = "teddy-price">29 euros
+                <button class = "btn btn-trash-teddy" title = "Supprimer cet ourson ?">
+                  <i class = "fas fa-trash-alt" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="total-price">
+            <p class="text-center">Montant total = </p>
+          </div>
+          <button class = "col-9 btn btn-secondary mb-3" title = "Vider le panier">
+            <a href="cart.html">Vider mon panier
+              <i class = "fas fa-trash-alt" aria-hidden="true"></i>
+            </a>     
+          </button>
+          <form id="contact">
+            <p class="col m-3">Merci de remplir ce formulaire pour valider votre commande :</p>
+            <div class="col m-3">
+              <label for="validationDefault01" class="form-label">Prénom</label>
+              <input type="text" class="form-control" id="validationDefault01" required>
+            </div>
+            <div class="col m-3">
+              <label for="validationDefault02" class="form-label">Nom</label>
+              <input type="text" class="form-control" id="validationDefault02" required>
+            </div>
+            <div class="col m-3">
+              <label for="validationDefault02" class="form-label">Adresse</label>
+              <input type="text" class="form-control" id="validationDefault02" required>
+            </div>
+            <div class="col m-3">
+              <label for="validationDefault03" class="form-label">Ville</label>
+              <input type="text" class="form-control" id="validationDefault03" required>
+            </div>
+            <div class="col m-3">
+              <label for="validationDefault03" class="form-label">email</label>
+              <input type="text" class="form-control" id="validationDefault03" required>
+            </div>
+            <div class="col m-3 text-center">
+              <button class="btn btn-secondary" type="submit">Valider ma commande</button>
+            </div>
+          </form>        
+        </div>
+
+        <div class="home">
+          <a href="index.html" class="btn btn-secondary">Retour à la page d'accueil</a>
+        </div>
+
+        </main>
+    </div>    
+
+      <div class="bg-dark mt-5">
+        <div class="container">
+          <div class="row pt-4 pb-3">
+            <div class="col">
+              <ul class="list-inline text-center">
+                <li class="list-inline-item"><a href="#">À propos</a></li>
+                <li class="list-inline-item">&middot;</li>
+                <li class="list-inline-item"><a href="#">Vie privée</a></li>
+                <li class="list-inline-item">&middot;</li>
+                <li class="list-inline-item"><a href="#">Conditions d'utilisations</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+</body>
+</html>

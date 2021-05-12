@@ -43,7 +43,7 @@ function buildTeddyPage(teddy) {
             <select id ="select-color" class="custom-select">${customTeddy(teddy)}</select>
             </div>
     </form>
-    <button id="add-cart" type="button" class="btn btn-secondary">Ajouter au panier</button>
+    <button id="add-cart" type="button" class="btn btn-secondary mt-3">Ajouter au panier</button>
     </div>`;
 
     // Récupération des données et envoi au panier
@@ -71,7 +71,7 @@ function buildTeddyPage(teddy) {
         storedTeddies.push(teddyChoosen)
         localStorage.setItem('storedTeddies', JSON.stringify(storedTeddies))
         if (window.confirm(teddy.name + " " + colorChoosen + ' a bien été ajouté. Souhaitez-vous consulter votre panier ?')) { 
-            window.location.href = "panier.html";
+            window.location.href = "cart.html";
         } else {
             window.location.href = "index.html";
         }
