@@ -1,1 +1,35 @@
 
+.btn{
+    font-weight: 500;
+    transform: scale(1);
+    transition: transform 200ms ease-in-out !important;
+    &:hover {
+        transform: scale(1.1);
+        border: 2px solid $secondary;
+      }
+
+    &.btn-primary{
+        &:hover{
+            background-color: #ffffff;
+            font-weight: 600;
+        }
+    }
+
+    &.btn-secondary{
+        &:hover{
+            color:$secondary;
+            background-color: #ffffff;
+            font-weight: 600;
+        }
+    }
+
+    &.btn-trash-teddy{
+        color: $secondary;
+        padding : .2em;
+        margin: .3em;
+        background-color: transparent;   
+    }
+}
+
+
+

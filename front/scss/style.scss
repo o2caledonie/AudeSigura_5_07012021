@@ -1,7 +1,9 @@
-@import "buttons_overrides";
+
 @import "card_overrides";
 @import "variable_overrides";
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "buttons_overrides";
+@import "form-control_overrides";
 
 body{
     font-family: 'Raleway', sans-serif;
@@ -10,15 +12,7 @@ body{
     margin: 2em 0;
     }
 
-    .btn{
-        transform: scale(1);
-        transition: transform 200ms ease-in-out;
-     
-        &:hover {
-            transform: scale(1.1);
-          }
-
-    }
+    
 
     #cart {
 
@@ -26,18 +20,10 @@ body{
             display:flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 1em;
     
             .teddy-price{
                 display:flex;
                 align-items: center;
-    
-                .btn-trash-teddy{
-                    color: $secondary;
-                    padding : .5em;
-                    background-color: transparent;   
-            
-                }
             }
     
         }

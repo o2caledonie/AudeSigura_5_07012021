@@ -46,12 +46,12 @@
         </div>
         <p id="erreur"></p>
         <div id="cart" class="card">
-          <h5 class="card-title mt-3 text-center">Vos oursons :</h5>
+          <h5 class="card-title mt-3 text-center">Mes oursons :</h5>
           <div id="teddy-list" class="col-9">
             <div class="teddy-item">
               <div class = "teddy-details">Nestor, Tan</div>
               <div class = "teddy-price">29 euros
-                <button class = "btn btn-trash-teddy" title = "Supprimer cet ourson ?">
+                <button class = "btn btn-trash-teddy" type="button" title = "Supprimer cet ourson ?">
                   <i class = "fas fa-trash-alt" aria-hidden="true"></i>
                 </button>
               </div>
@@ -59,7 +59,7 @@
             <div class="teddy-item">
               <div class = "teddy-details">Nestor, Tan</div>
               <div class = "teddy-price">29 euros
-                <button class = "btn btn-trash-teddy" title = "Supprimer cet ourson ?">
+                <button class = "btn btn-trash-teddy" type="button" title = "Supprimer cet ourson ?">
                   <i class = "fas fa-trash-alt" aria-hidden="true"></i>
                 </button>
               </div>
@@ -68,10 +68,9 @@
           <div id="total-price">
             <p class="text-center">Montant total = </p>
           </div>
-          <button class = "col-9 btn btn-secondary mb-3" title = "Vider le panier">
-            <a href="cart.html">Vider mon panier
+          <button class = "col-9 btn btn-secondary mb-3" type="button" title = "Vider le panier">
+            Vider mon panier
               <i class = "fas fa-trash-alt" aria-hidden="true"></i>
-            </a>     
           </button>
           <form id="contact">
             <p class="col m-3">Merci de remplir ce formulaire pour valider votre commande :</p>
@@ -101,8 +100,8 @@
           </form>        
         </div>
 
-        <div class="home">
-          <a href="index.html" class="btn btn-secondary">Retour à la page d'accueil</a>
+        <div class="home col-6 mx-auto">
+          <a href="index.html" class="btn btn-primary">Retour à la page d'accueil</a>
         </div>
 
         </main>

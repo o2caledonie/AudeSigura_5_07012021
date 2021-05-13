@@ -10731,33 +10731,52 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.btn {
+  font-weight: 500;
+  transform: scale(1);
+  transition: transform 200ms ease-in-out !important;
+}
+.btn:hover {
+  transform: scale(1.1);
+  border: 2px solid #9B4E4E;
+}
+.btn.btn-primary:hover {
+  background-color: #ffffff;
+  font-weight: 600;
+}
+.btn.btn-secondary:hover {
+  color: #9B4E4E;
+  background-color: #ffffff;
+  font-weight: 600;
+}
+.btn.btn-trash-teddy {
+  color: #9B4E4E;
+  padding: 0.2em;
+  margin: 0.3em;
+  background-color: transparent;
+}
+
+.form-control:focus {
+  color: #000000;
+  border-color: #9B4E4E;
+  box-shadow: 0px 0px 10px #9B4E4E;
+  font-weight: 500;
+}
+
 body {
   font-family: "Raleway", sans-serif;
 }
 body .jumbotron {
   margin: 2em 0;
 }
-body .btn {
-  transform: scale(1);
-  transition: transform 200ms ease-in-out;
-}
-body .btn:hover {
-  transform: scale(1.1);
-}
 body #cart .teddy-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1em;
 }
 body #cart .teddy-item .teddy-price {
   display: flex;
   align-items: center;
-}
-body #cart .teddy-item .teddy-price .btn-trash-teddy {
-  color: #9B4E4E;
-  padding: 0.5em;
-  background-color: transparent;
 }
 
 /*# sourceMappingURL=style.css.map */
