@@ -67,6 +67,9 @@ function buildTeddyPage(teddy) {
         console.log(storedTeddies)
         if (storedTeddies == null) {
             storedTeddies = []          
+        }
+        if (storedTeddies != null) {
+            alert(storedTeddies.includes("_id"));
         } 
         storedTeddies.push(teddyChoosen)
         localStorage.setItem('storedTeddies', JSON.stringify(storedTeddies))
@@ -98,10 +101,6 @@ function customTeddy(teddy) {
     return custom;   
 }
     
-// Ajout Panier
-function ajoutPanier(a, b, c) {
-    console.log(a, b, c)
-}
 
 
 fetchTeddy();

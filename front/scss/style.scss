@@ -12,21 +12,30 @@ body{
     margin: 2em 0;
     }
 
-    
-
     #cart {
 
-        .teddy-item{
-            display:flex;
-            justify-content: space-between;
-            align-items: center;
-    
-            .teddy-price{
+        #teddies-list {
+            
+            
+            .teddy-item{
                 display:flex;
+                justify-content: space-between;
                 align-items: center;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: pre-line;
+
+        
+                .teddy-price{
+                    display:flex;
+                    align-items: center;
+                    white-space: nowrap;
+                }
+        
             }
-    
         }
+
+        
 
     }
     

@@ -10769,14 +10769,18 @@ body {
 body .jumbotron {
   margin: 2em 0;
 }
-body #cart .teddy-item {
+body #cart #teddies-list .teddy-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-line;
 }
-body #cart .teddy-item .teddy-price {
+body #cart #teddies-list .teddy-item .teddy-price {
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 /*# sourceMappingURL=style.css.map */
