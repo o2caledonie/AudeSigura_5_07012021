@@ -59,20 +59,51 @@ function buildTeddyPage(teddy) {
             teddyId : teddy._id,
             teddyColor : colorChoosen,
             teddyPrice : teddy.price,
-            quantity : 1,
+            inCart : 1,
         };
         console.log(teddyChoosen);
     
         let storedTeddies = JSON.parse(localStorage.getItem('storedTeddies'))
         console.log(storedTeddies)
         if (storedTeddies == null) {
-            storedTeddies = []          
-        }
-        if (storedTeddies != null) {
-            alert(storedTeddies.includes("_id"));
-        } 
-        storedTeddies.push(teddyChoosen)
+            storedTeddies = []
+            storedTeddies.push(teddyChoosen)
+        } else {
+            for(storedTeddy of storedTeddies) {
+                console.log(storedTeddy)
+                console.log(teddyChoosen)
+                if (teddyChoosen['teddyColor'] != storedTeddy['teddyColor'] && teddyChoosen['teddyColor'] != storedTeddy['teddyColor']){
+                    console.log("doesn't exist")
+                    storedTeddies.push(teddyChoosen)
+            
+                    
+                } else {
+                    console.log("exist")
+                    storedTeddy.inCart += 1;
+                    
+                  }
+                  
+                // if (teddyChoosen['teddyColor'] == storedTeddy['teddyColor'] && teddyChoosen['teddyColor'] == storedTeddy['teddyColor']){
+                //     console.log("exists")
+                //     storedTeddy.inCart += 1;
+                //     break
+                    
+                // } else {
+                //     console.log("doesn't exist")
+                //     storedTeddies.push(teddyChoosen)
+                    
+                //   }
+                
+            }
+                
+          }    
+            
+        
+        
+             
+       
         localStorage.setItem('storedTeddies', JSON.stringify(storedTeddies))
+        
         if (window.confirm(teddy.name + " " + colorChoosen + ' a bien été ajouté. Souhaitez-vous consulter votre panier ?')) { 
             window.location.href = "cart.html";
         } else {

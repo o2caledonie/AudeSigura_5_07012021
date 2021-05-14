@@ -32,13 +32,13 @@ if(storedTeddies == null || storedTeddies.length === 0) {
     const teddyDetails = document.createElement('div');
     teddyItem.appendChild(teddyDetails);
     teddyDetails.className = "teddy-details";
-    teddyDetails.textContent = storedTeddy.quantity + " " + storedTeddy.teddyName + " , " + storedTeddy.teddyColor;
+    teddyDetails.textContent = storedTeddy.inCart + " " + storedTeddy.teddyName + " , " + storedTeddy.teddyColor;
     
     const teddyPrice = document.createElement('div');
     teddyItem.appendChild(teddyPrice);
     teddyPrice.id = teddy++;
     teddyPrice.className = 'teddy-price';
-    teddyPrice.textContent = storedTeddy.teddyPrice/100 + " €";
+    teddyPrice.textContent = (storedTeddy.teddyPrice)*(storedTeddy.inCart)/100 + " €";
 
     // Set "trash-teddy" button
     const trashTeddy = document.createElement('button');
@@ -66,7 +66,7 @@ if(storedTeddies == null || storedTeddies.length === 0) {
     // Display total price
     let arrayPrice = []
     for (storedTeddy of storedTeddies) {
-        let item = storedTeddy.teddyPrice*storedTeddy.quantity;
+        let item = storedTeddy.teddyPrice*storedTeddy.inCart;
         arrayPrice.push(item);
         console.log(arrayPrice)
     }
