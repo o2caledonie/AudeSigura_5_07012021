@@ -28,11 +28,22 @@ if(storedTeddies == null || storedTeddies.length === 0) {
         const teddyItem = document.createElement('div');
         teddiesList.appendChild(teddyItem);
         teddyItem.className = 'teddy-item';
+        teddyItem.innerHTML = `<input class="form-control form-control-numbers" type="number" id="teddy-incart" min="1" max="10" value="${storedTeddy.inCart}">`
+
+    // const teddyInCart = document.createElement('input');
+    // teddyItem.appendChild(teddyInCart);
+    // teddyInCart.setAttribute('class', 'form-control');
+    // teddyInCart.setAttribute('id', 'teddy-incart');
+    // teddyInCart.setAttribute('type', 'number');
+    // teddyInCart.setAttribute('min', '1');
+    // teddyInCart.setAttribute('max', '10');
+    // teddyInCart.setAttribute('value', '${storedTeddy.inCart}');
+
 
     const teddyDetails = document.createElement('div');
     teddyItem.appendChild(teddyDetails);
     teddyDetails.className = "teddy-details";
-    teddyDetails.textContent = storedTeddy.inCart + " " + storedTeddy.teddyName + " , " + storedTeddy.teddyColor;
+    teddyDetails.textContent = storedTeddy.teddyName + " , " + storedTeddy.teddyColor;
     
     const teddyPrice = document.createElement('div');
     teddyItem.appendChild(teddyPrice);

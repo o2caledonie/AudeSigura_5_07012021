@@ -1,4 +1,10 @@
 .form-control{
+
+    &.form-control-numbers {
+        width:40px;
+        padding: .3em;
+        margin-right: .5em;
+    }
     &:focus{
         color: #000000;
         border-color: $secondary;

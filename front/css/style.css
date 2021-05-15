@@ -10756,6 +10756,11 @@ textarea.form-control-lg {
   background-color: transparent;
 }
 
+.form-control.form-control-numbers {
+  width: 40px;
+  padding: 0.3em;
+  margin-right: 0.5em;
+}
 .form-control:focus {
   color: #000000;
   border-color: #9B4E4E;

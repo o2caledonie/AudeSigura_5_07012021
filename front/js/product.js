@@ -66,42 +66,25 @@ function buildTeddyPage(teddy) {
         let storedTeddies = JSON.parse(localStorage.getItem('storedTeddies'))
         console.log(storedTeddies)
         if (storedTeddies == null) {
+            // if the cart is empty, we push the first item
             storedTeddies = []
             storedTeddies.push(teddyChoosen)
         } else {
-            for(storedTeddy of storedTeddies) {
-                console.log(storedTeddy)
-                console.log(teddyChoosen)
-                if (teddyChoosen['teddyColor'] != storedTeddy['teddyColor'] && teddyChoosen['teddyColor'] != storedTeddy['teddyColor']){
-                    console.log("doesn't exist")
-                    storedTeddies.push(teddyChoosen)
-            
-                    
-                } else {
-                    console.log("exist")
-                    storedTeddy.inCart += 1;
-                    
-                  }
-                  
-                // if (teddyChoosen['teddyColor'] == storedTeddy['teddyColor'] && teddyChoosen['teddyColor'] == storedTeddy['teddyColor']){
-                //     console.log("exists")
-                //     storedTeddy.inCart += 1;
-                //     break
-                    
-                // } else {
-                //     console.log("doesn't exist")
-                //     storedTeddies.push(teddyChoosen)
-                    
-                //   }
-                
+            let exist = false;
+            for (let storedTeddy of storedTeddies) {
+                // if the item is already in the array we increment the quantity by 1
+                if (teddyChoosen['teddyColor'] == storedTeddy['teddyColor'] && teddyChoosen['teddyColor'] == storedTeddy['teddyColor']){
+                    console.log("exists")
+                    storedTeddy.inCart += 1; 
+                    exist = true;
+                } 
+            } 
+            if(!exist){
+                // if exist is still false, then it means the item is nowhere in the Array, so we add the new item
+                storedTeddies.push(teddyChoosen)  
             }
-                
           }    
-            
-        
-        
-             
-       
+   
         localStorage.setItem('storedTeddies', JSON.stringify(storedTeddies))
         
         if (window.confirm(teddy.name + " " + colorChoosen + ' a bien été ajouté. Souhaitez-vous consulter votre panier ?')) { 
