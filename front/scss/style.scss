@@ -21,15 +21,22 @@ body{
                 display:flex;
                 justify-content: space-between;
                 align-items: center;
+                margin : .5em 0;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: pre-line;
+
+                .teddy-details {
+                    display: flex;
+                    align-items: center;
+                }
 
         
                 .teddy-price{
                     display:flex;
                     align-items: center;
                     white-space: nowrap;
+                    margin-left: .4em;
                 }
         
             }

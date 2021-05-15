@@ -10756,12 +10756,15 @@ textarea.form-control-lg {
   background-color: transparent;
 }
 
-.form-control.form-control-numbers {
-  width: 40px;
-  padding: 0.3em;
-  margin-right: 0.5em;
+.form-group {
+  margin-top: 1em;
 }
-.form-control:focus {
+.form-group .form-control.form-control-numbers {
+  width: 50px;
+  padding: 0.3em;
+  margin: auto;
+}
+.form-group .form-control:focus {
   color: #000000;
   border-color: #9B4E4E;
   box-shadow: 0px 0px 10px #9B4E4E;
@@ -10778,14 +10781,20 @@ body #cart #teddies-list .teddy-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0.5em 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: pre-line;
+}
+body #cart #teddies-list .teddy-item .teddy-details {
+  display: flex;
+  align-items: center;
 }
 body #cart #teddies-list .teddy-item .teddy-price {
   display: flex;
   align-items: center;
   white-space: nowrap;
+  margin-left: 0.4em;
 }
 
 /*# sourceMappingURL=style.css.map */
