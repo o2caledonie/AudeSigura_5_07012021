@@ -5,6 +5,7 @@
 @import "buttons_overrides";
 @import "form-control_overrides";
 
+
 body{
     font-family: 'Raleway', sans-serif;
 
@@ -15,8 +16,7 @@ body{
     #cart {
 
         #teddies-list {
-            
-            
+                       
             .teddy-item{
                 display:flex;
                 justify-content: space-between;
@@ -31,7 +31,6 @@ body{
                     align-items: center;
                 }
 
-        
                 .teddy-price{
                     display:flex;
                     align-items: center;

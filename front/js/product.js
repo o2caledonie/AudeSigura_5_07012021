@@ -84,12 +84,13 @@ function buildTeddyPage(teddy) {
         } else {
             let exist = false;
             for (let storedTeddy of storedTeddies) {
-                // if the item is already in the array we increment the quantity
+                // if the item is already in the array we update the quantity
                 if (teddyChoosen['teddyColor'] == storedTeddy['teddyColor'] && teddyChoosen['teddyColor'] == storedTeddy['teddyColor']){
                     console.log("exists")
                     console.log(storedTeddy['inCart'])
                     console.log(storedTeddy)
-                    storedTeddy.inCart = quantityChoosen            
+                    storedTeddy.inCart = quantityChoosen  
+                    console.log(storedTeddy)          
                     exist = true;
                 }
             }
