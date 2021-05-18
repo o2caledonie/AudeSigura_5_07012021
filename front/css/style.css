@@ -1,10 +1,4 @@
 @charset "UTF-8";
-.card {
-  margin: 2em 1.5em;
-  box-shadow: 0 0 15px #c2c1c1;
-  align-items: center;
-}
-
 /*!
  * Bootstrap v5.0.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -10731,6 +10725,12 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.card {
+  margin: 2em 1.5em;
+  box-shadow: 0 0 15px #c2c1c1;
+  align-items: center;
+}
+
 .btn {
   font-weight: 500;
   transform: scale(1);
@@ -10740,6 +10740,12 @@ textarea.form-control-lg {
   transform: scale(1.1);
   border: 2px solid #9B4E4E;
 }
+.btn:focus {
+  transform: scale(1.1);
+  border-color: #9B4E4E;
+  box-shadow: 0 0 0 0.1rem #9B4E4E;
+  font-weight: 600;
+}
 .btn.btn-primary:hover {
   background-color: #ffffff;
   font-weight: 600;
@@ -10748,6 +10754,10 @@ textarea.form-control-lg {
   color: #9B4E4E;
   background-color: #ffffff;
   font-weight: 600;
+}
+.btn.btn-secondary:focus {
+  color: #9B4E4E;
+  background-color: #ffffff;
 }
 .btn.btn-trash-teddy {
   color: #9B4E4E;
@@ -10759,16 +10769,49 @@ textarea.form-control-lg {
 .form-group {
   margin-top: 1em;
 }
-.form-group .form-control.form-control-numbers {
+
+.form-control.form-control-numbers {
   width: 50px;
   padding: 0.3em;
   margin: auto;
 }
-.form-group .form-control:focus {
+.form-control:focus {
   color: #000000;
   border-color: #9B4E4E;
   box-shadow: 0px 0px 10px #9B4E4E;
   font-weight: 500;
+}
+
+.navbar-brand {
+  transform: scale(1);
+  transition: transform 200ms ease-in-out !important;
+}
+.navbar-brand:hover {
+  transform: scale(1.1);
+}
+.navbar-brand:focus {
+  transform: scale(1.1);
+}
+
+.navbar-toggler:hover {
+  box-shadow: 0 0 0 0.25rem;
+}
+
+.navbar-nav .nav-link {
+  padding-left: 0.5em;
+}
+.navbar-nav .nav-link:hover {
+  font-weight: 600;
+  text-decoration: underline;
+}
+.navbar-nav .nav-link:focus {
+  text-decoration: none;
+  font-weight: 700;
+  outline-color: #9B4E4E;
+}
+
+.badge {
+  color: #000000;
 }
 
 body {
@@ -10789,6 +10832,19 @@ body #cart #teddies-list .teddy-item {
 body #cart #teddies-list .teddy-item .teddy-details {
   display: flex;
   align-items: center;
+  color: #9B4E4E;
+  text-decoration: none;
+  margin-left: 0.4em;
+  font-weight: 500;
+}
+body #cart #teddies-list .teddy-item .teddy-details:hover {
+  font-weight: 700;
+  text-decoration: underline;
+}
+body #cart #teddies-list .teddy-item .teddy-details:focus {
+  font-weight: 700;
+  outline-color: #9B4E4E;
+  outline-offset: 0.2em;
 }
 body #cart #teddies-list .teddy-item .teddy-price {
   display: flex;

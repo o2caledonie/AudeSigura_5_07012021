@@ -8,50 +8,50 @@ function sendData(data) {
     fetch("http://localhost:3000/api/teddies/order", {
         method: "POST",
         headers: {
-        'Content-Type': 'application/json'
+            'Content-Type': 'application/json'
         },
-        
+
         body: JSON.stringify(data),
-    
+
     })
 
-    .then(res => {
-        console.log(res)
-        
-        if(!res.ok) {
-            throw Error("ERROR");
-        }
-        return res.json();
-    })
+        .then(res => {
+            console.log(res)
 
-    .then(resOrder => {
-        console.log(resOrder)
-        console.log(resOrder.orderId)
-        localStorage.setItem('resOrder', resOrder.orderId)
-        console.log(resOrder)
+            if (!res.ok) {
+                throw Error("ERROR");
+            }
+            return res.json();
+        })
 
-        let products = resOrder.products
-        // let total = 0
-        // for (product of products){
-        //     console.log(product.price)
-        //     total = total + product.price
-        // }
-        // console.log(total)
-        let reducer = function (total, product) {
-            return total + product.price
-        }
-        let total = products.reduce(reducer, 0)
-        console.log(total)
-        localStorage.setItem('totalCartPrice', total)
-        localStorage.removeItem('storedTeddies')
-        window.location = 'order.html'     
-    })
+        .then(resOrder => {
+            console.log(resOrder)
+            console.log(resOrder.orderId)
+            localStorage.setItem('resOrder', resOrder.orderId)
+            console.log(resOrder)
 
-    .catch(error => {
-        console.log(error);
-        document.getElementById('erreur').innerHTML = "Erreur lors de l'envoi des données au serveur :("
- 
-    });
+            let products = resOrder.products
+            // let total = 0
+            // for (product of products){
+            //     console.log(product.price)
+            //     total = total + product.price
+            // }
+            // console.log(total)
+            let reducer = function (total, product) {
+                return total + product.price
+            }
+            let total = products.reduce(reducer, 0)
+            console.log(total)
+            localStorage.setItem('totalCartPrice', total)
+            localStorage.removeItem('storedTeddies')
+            window.location = 'order.html'
+        })
+
+        .catch(error => {
+            console.log(error);
+            document.getElementById('erreur').innerHTML = "Erreur lors de l'envoi des données au serveur :("
+
+        });
 };
 
 // send cart total price to localStorage
@@ -72,7 +72,7 @@ teddiesList.id = 'teddies-list';
 teddiesList.className = 'col-11 col-md-6 col-lg-4'
 
 
-if(storedTeddies == null || storedTeddies.length === 0) {
+if (storedTeddies == null || storedTeddies.length === 0) {
     // if cart is empty
     const noTeddies = document.createElement('p');
     teddiesList.appendChild(noTeddies);
@@ -86,48 +86,49 @@ if(storedTeddies == null || storedTeddies.length === 0) {
         teddiesList.appendChild(teddyItem);
         teddyItem.className = 'teddy-item';
 
+        let teddyLink = `product.html?id=${storedTeddy.teddyId}`
+        const teddyDetails = document.createElement('a');
+        teddyItem.appendChild(teddyDetails);
+        teddyDetails.className = "teddy-details";
+        teddyDetails.setAttribute ('href', teddyLink);
+        // teddyDetails.innerHTML = `<input class="form-control form-control-numbers" type="number" id="teddy-incart" min="1" max="10" value="${storedTeddy.inCart}">${storedTeddy.teddyName}, ${storedTeddy.teddyColor}`
+        teddyDetails.textContent = storedTeddy.inCart + "   " + storedTeddy.teddyName + " , " + storedTeddy.teddyColor;
 
-    const teddyDetails = document.createElement('div');
-    teddyItem.appendChild(teddyDetails);
-    teddyDetails.className = "teddy-details";
-    // teddyDetails.innerHTML = `<input class="form-control form-control-numbers" type="number" id="teddy-incart" min="1" max="10" value="${storedTeddy.inCart}">${storedTeddy.teddyName}, ${storedTeddy.teddyColor}`
-    teddyDetails.textContent = storedTeddy.inCart + "   " + storedTeddy.teddyName + " , " + storedTeddy.teddyColor;
 
-    
-    
-    const teddyPrice = document.createElement('div');
-    teddyItem.appendChild(teddyPrice);
-    teddyPrice.id = teddy++;
-    teddyPrice.className = 'teddy-price';
-    teddyPrice.textContent = (storedTeddy.teddyPrice)*(storedTeddy.inCart)/100 + " €";
 
-    // Set "trash-teddy" button
-    const trashTeddy = document.createElement('button');
-    teddyPrice.appendChild(trashTeddy);
-    trashTeddy.className = 'btn btn-trash-teddy';
-    trashTeddy.type = 'button';
-    trashTeddy.title = 'Supprimer cet ourson ?';
-    trashTeddy.innerHTML = `<i class="fas fa-trash-alt" aria-hidden="true"></i>`;
+        const teddyPrice = document.createElement('div');
+        teddyItem.appendChild(teddyPrice);
+        teddyPrice.id = teddy++;
+        teddyPrice.className = 'teddy-price';
+        teddyPrice.textContent = (storedTeddy.teddyPrice) * (storedTeddy.inCart) / 100 + " €";
 
-    // Action : trash teddy      
-    trashTeddy.addEventListener("click", function (event){
-        event.preventDefault();
-        let id = this.closest('.teddy-price').id;
-        storedTeddies.splice(id, 1);
+        // Set "trash-teddy" button
+        const trashTeddy = document.createElement('button');
+        teddyPrice.appendChild(trashTeddy);
+        trashTeddy.className = 'btn btn-trash-teddy';
+        trashTeddy.type = 'button';
+        trashTeddy.title = 'Supprimer cet ourson ?';
+        trashTeddy.innerHTML = `<i class="fas fa-trash-alt" aria-hidden="true"></i>`;
 
-        //Update localStorage
-        localStorage.setItem('storedTeddies', JSON.stringify(storedTeddies));
-        JSON.parse(localStorage.getItem('storedTeddies'));
+        // Action : trash teddy      
+        trashTeddy.addEventListener("click", function (event) {
+            event.preventDefault();
+            let id = this.closest('.teddy-price').id;
+            storedTeddies.splice(id, 1);
 
-        alert('Cet ourson a bien été supprimé !');
-        window.location.href = "cart.html";   
-    });
+            //Update localStorage
+            localStorage.setItem('storedTeddies', JSON.stringify(storedTeddies));
+            JSON.parse(localStorage.getItem('storedTeddies'));
+
+            alert('Cet ourson a bien été supprimé !');
+            window.location.href = "cart.html";
+        });
     }
- 
+
     // Display total price
     let arrayPrice = []
     for (storedTeddy of storedTeddies) {
-        let item = (storedTeddy.teddyPrice*storedTeddy.inCart)/100;
+        let item = (storedTeddy.teddyPrice * storedTeddy.inCart) / 100;
         arrayPrice.push(item);
         console.log(arrayPrice)
     }
@@ -141,7 +142,7 @@ if(storedTeddies == null || storedTeddies.length === 0) {
     totalPrice.id = 'total-price';
     totalPrice.className = 'text-center my-2';
     totalPrice.innerHTML = `Montant total = ${updatePrice} €`;
-    
+
 
     // Set "empty-cart" button
     const emptyCart = document.createElement('button');
@@ -263,7 +264,7 @@ if(storedTeddies == null || storedTeddies.length === 0) {
     firstName.addEventListener('change', function (event) {
         if (isValid(firstName.value)) {
         } else {
-            alert( "Aucun chiffre ou symbole n'est autorisé.")
+            alert("Aucun chiffre ou symbole n'est autorisé.")
             event.preventDefault()
         }
     });
@@ -271,7 +272,7 @@ if(storedTeddies == null || storedTeddies.length === 0) {
     lastName.addEventListener('change', function (event) {
         if (isValid(lastName.value)) {
         } else {
-            alert( "Aucun chiffre ou symbole n'est autorisé.")
+            alert("Aucun chiffre ou symbole n'est autorisé.")
             event.preventDefault()
         }
     });
@@ -279,7 +280,7 @@ if(storedTeddies == null || storedTeddies.length === 0) {
     city.addEventListener('change', function (event) {
         if (isValid(city.value)) {
         } else {
-            alert( "Aucun chiffre ou symbole n'est autorisé.")
+            alert("Aucun chiffre ou symbole n'est autorisé.")
             event.preventDefault()
         }
     });
@@ -324,13 +325,13 @@ if(storedTeddies == null || storedTeddies.length === 0) {
 
     // Action : if form is valid
     submit.addEventListener("click", function (event) {
-        if(
-            isValid(firstName.value) && 
-            isValid(lastName.value) && 
-            validAddress(address.value) && 
-            isValid(city.value) && 
+        if (
+            isValid(firstName.value) &&
+            isValid(lastName.value) &&
+            validAddress(address.value) &&
+            isValid(city.value) &&
             validEmail(email.value)
-        ){
+        ) {
             event.preventDefault();
 
             // Create object : "contact" 
@@ -348,7 +349,13 @@ if(storedTeddies == null || storedTeddies.length === 0) {
             for (storedTeddy of storedTeddies) {
                 let itemsId = storedTeddy.teddyId;
                 console.log(itemsId);
-                products.push(itemsId)
+                let itemsNb = storedTeddy.inCart;
+                console.log(itemsNb)
+                for (let i = 0; i < itemsNb; i++) {
+                    console.log(itemsId)
+                    products.push(itemsId)
+                }
+
             }
             console.log(products);
 
@@ -359,12 +366,12 @@ if(storedTeddies == null || storedTeddies.length === 0) {
                 products,
             }
             console.log(send)
-           
+
             sendData(send);
 
         }
 
-        
+
     });
- 
+
 }

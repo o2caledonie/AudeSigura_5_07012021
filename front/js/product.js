@@ -5,7 +5,8 @@ const id = urlParams.get('id');
 console.log(id);
 
 function fetchTeddy() {
-    fetch("http://localhost:3000/api/teddies/" + id)
+    // fetch("http://localhost:3000/api/teddies/" + id)
+    fetch (`http://localhost:3000/api/teddies/${id}`)
     .then(res => {
         console.log(res)
         if(!res.ok) {
@@ -28,7 +29,7 @@ function fetchTeddy() {
     });
 }
 
-// Création page "teddy"
+// Create "teddy" page
 function buildTeddyPage(teddy) {
     const newElt = document.createElement("div");
     newElt.classList.add("card");
@@ -136,8 +137,6 @@ function buildTeddyPage(teddy) {
 
 }
 
-
-
 // custom options
 function customTeddy(teddy) {
     const colors = teddy.colors;
@@ -153,8 +152,5 @@ function customTeddy(teddy) {
         
     return custom;   
 }
-
-
-
 
 fetchTeddy();

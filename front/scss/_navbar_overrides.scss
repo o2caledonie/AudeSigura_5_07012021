@@ -1,0 +1,31 @@
+.navbar-brand{
+    transform: scale(1);
+    transition: transform 200ms ease-in-out !important;
+    &:hover {
+        transform: scale(1.1);
+    }
+    &:focus {
+        transform: scale(1.1);  
+    }
+}
+
+.navbar-toggler {
+    &:hover {
+        box-shadow: 0 0 0 0.25rem;
+    }
+}
+
+.navbar-nav {
+    .nav-link {
+        padding-left: .5em;
+        &:hover{
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        &:focus{
+            text-decoration: none;
+            font-weight: 700;
+            outline-color: $secondary;
+        }
+    }
+}
