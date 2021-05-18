@@ -44,13 +44,13 @@ function sendData(data) {
         console.log(total)
         localStorage.setItem('totalCartPrice', total)
         localStorage.removeItem('storedTeddies')
-        window.location = 'order.html'
-        
+        window.location = 'order.html'     
     })
 
     .catch(error => {
         console.log(error);
-        
+        document.getElementById('erreur').innerHTML = "Erreur lors de l'envoi des données au serveur :("
+ 
     });
 };
 
@@ -123,19 +123,7 @@ if(storedTeddies == null || storedTeddies.length === 0) {
         window.location.href = "cart.html";   
     });
     }
-    // // Update teddies quantity in cart
-    // console.log(storedTeddies);
-    // let changeCart = document.querySelectorAll('#teddy-incart');
-    // console.log(changeCart);
-    // changeCart.addEventListener('input', updateValue);
-    // function updateValue(e) {
-    //     alerte ('youhou')
-    // };
-    // changeCart.addEventListener('change', (event) => {
-    //     localStorage.setItem(storedTeddies, event.target.value)
-    // }) ;
-    
-    
+ 
     // Display total price
     let arrayPrice = []
     for (storedTeddy of storedTeddies) {
@@ -148,11 +136,12 @@ if(storedTeddies == null || storedTeddies.length === 0) {
     const updatePrice = arrayPrice.reduce(reducer, 0);
     console.log(updatePrice);
 
-    const totalprice = document.createElement('div');
-    cart.appendChild(totalprice);
-    totalprice.id = 'total-price';
-    totalprice.className = 'text-center my-2';
-    totalprice.innerHTML = `Montant total = ${updatePrice} €`;
+    const totalPrice = document.createElement('div');
+    cart.appendChild(totalPrice);
+    totalPrice.id = 'total-price';
+    totalPrice.className = 'text-center my-2';
+    totalPrice.innerHTML = `Montant total = ${updatePrice} €`;
+    
 
     // Set "empty-cart" button
     const emptyCart = document.createElement('button');
