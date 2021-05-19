@@ -90,7 +90,7 @@ if (storedTeddies == null || storedTeddies.length === 0) {
         const teddyDetails = document.createElement('a');
         teddyItem.appendChild(teddyDetails);
         teddyDetails.className = "teddy-details";
-        teddyDetails.setAttribute ('href', teddyLink);
+        teddyDetails.setAttribute('href', teddyLink);
         // teddyDetails.innerHTML = `<input class="form-control form-control-numbers" type="number" id="teddy-incart" min="1" max="10" value="${storedTeddy.inCart}">${storedTeddy.teddyName}, ${storedTeddy.teddyColor}`
         teddyDetails.textContent = storedTeddy.inCart + "   " + storedTeddy.teddyName + " , " + storedTeddy.teddyColor;
 

@@ -20,7 +20,7 @@ recap.className = 'card text-center';
 recap.innerHTML = `<h5 class="card-header">Récapitulatif de votre commande :</h5>
 <div class="card-body">
 <p class="card-text">Numéro de commande : ${orderId}</p>
-<p class="card-text">Montant total de votre commande : ${totalCartPrice/100} €</p>`;
+<p class="card-text">Montant total de votre commande : ${totalCartPrice / 100} €</p>`;
 
 // Thanks
 const thanks = document.createElement('p');

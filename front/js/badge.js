@@ -1,16 +1,16 @@
 //Get teddies in cart from localStorage
-function getTeddiesCountInCart(){
+function getTeddiesCountInCart() {
     let storedTeddies = JSON.parse(localStorage.getItem('storedTeddies'))
     console.log(storedTeddies)
     let teddiesCountInCart = 0;
-    if (storedTeddies === null){
+    if (storedTeddies === null) {
         return teddiesCountInCart;
     }
-    for(let storedTeddy of storedTeddies) {
+    for (let storedTeddy of storedTeddies) {
         let teddiesCount = parseInt(storedTeddy.inCart);
         teddiesCountInCart = teddiesCountInCart + teddiesCount
     }
-    
+
     console.log(teddiesCountInCart)
     return teddiesCountInCart;
 }
@@ -22,10 +22,10 @@ function updateTeddiesCount(total, selector) {
 }
 
 // Update Cart Count
-function updateCartCount(){
+function updateCartCount() {
     let total = getTeddiesCountInCart();
     let selector = '.badge';
-    updateTeddiesCount(total,selector);
+    updateTeddiesCount(total, selector);
 }
 
 updateCartCount()

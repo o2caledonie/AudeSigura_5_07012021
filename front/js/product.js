@@ -6,27 +6,27 @@ console.log(id);
 
 function fetchTeddy() {
     // fetch("http://localhost:3000/api/teddies/" + id)
-    fetch (`http://localhost:3000/api/teddies/${id}`)
-    .then(res => {
-        console.log(res)
-        if(!res.ok) {
-            throw Error("ERROR");
-        }
-        return res.json();
-    })
+    fetch(`http://localhost:3000/api/teddies/${id}`)
+        .then(res => {
+            console.log(res)
+            if (!res.ok) {
+                throw Error("ERROR");
+            }
+            return res.json();
+        })
 
-    .then(teddy => {
-        console.log(teddy);
-        let newElt = buildTeddyPage(teddy);
-        console.log(newElt);
-        let elt = document.getElementById('teddy');
-        elt.appendChild(newElt);  
-    })
+        .then(teddy => {
+            console.log(teddy);
+            let newElt = buildTeddyPage(teddy);
+            console.log(newElt);
+            let elt = document.getElementById('teddy');
+            elt.appendChild(newElt);
+        })
 
-    .catch(error => {
-        console.log(error);
-        document.getElementById('erreur').innerHTML = "Erreur lors de la récupération des données :("
-    });
+        .catch(error => {
+            console.log(error);
+            document.getElementById('erreur').innerHTML = "Erreur lors de la récupération des données :("
+        });
 }
 
 // Create "teddy" page
@@ -37,7 +37,7 @@ function buildTeddyPage(teddy) {
     <div class="card-body text-center">
     <h5 class="card-title"><span class="name">${teddy.name}</span></h5>
     <p class="description">${teddy.description}</p>
-    <div class="price">Prix : ${(teddy.price/100).toFixed(2) + " €"}</span></div>
+    <div class="price">Prix : ${(teddy.price / 100).toFixed(2) + " €"}</span></div>
     <form class="form-group">
         <div class="custom">
             <label for ="Choix de couleurs pour ${teddy.name}">Choisissez sa couleur :</label> 
@@ -56,26 +56,26 @@ function buildTeddyPage(teddy) {
     // quantity.addEventListener('change', function (event) {
     //     event.preventDefault();
     // })
-    
+
 
     // Récupération des données et envoi au panier
     const button = newElt.querySelector("#add-cart")
     console.log(button)
-    button.addEventListener("click", function (event){
+    button.addEventListener("click", function (event) {
         event.preventDefault();
 
         let colorChoosen = newElt.querySelector("#select-color").value
         console.log(colorChoosen)
         let quantityChoosen = newElt.querySelector('input').value
         let teddyChoosen = {
-            teddyName : teddy.name,
-            teddyId : teddy._id,
-            teddyColor : colorChoosen,
-            teddyPrice : teddy.price,
-            inCart : quantityChoosen,
+            teddyName: teddy.name,
+            teddyId: teddy._id,
+            teddyColor: colorChoosen,
+            teddyPrice: teddy.price,
+            inCart: quantityChoosen,
         };
         console.log(teddyChoosen);
-    
+
         let storedTeddies = JSON.parse(localStorage.getItem('storedTeddies'))
         console.log(storedTeddies)
         if (storedTeddies == null) {
@@ -86,20 +86,20 @@ function buildTeddyPage(teddy) {
             let exist = false;
             for (let storedTeddy of storedTeddies) {
                 // if the item is already in the array we update the quantity
-                if (teddyChoosen['teddyColor'] == storedTeddy['teddyColor'] && teddyChoosen['teddyColor'] == storedTeddy['teddyColor']){
+                if (teddyChoosen['teddyColor'] == storedTeddy['teddyColor'] && teddyChoosen['teddyColor'] == storedTeddy['teddyColor']) {
                     console.log("exists")
                     console.log(storedTeddy['inCart'])
                     console.log(storedTeddy)
-                    storedTeddy.inCart = quantityChoosen  
-                    console.log(storedTeddy)          
+                    storedTeddy.inCart = quantityChoosen
+                    console.log(storedTeddy)
                     exist = true;
                 }
             }
-            if(!exist) {
+            if (!exist) {
                 // if exist is still false, then it means the item is nowhere in the Array, so we add the new item
                 storedTeddies.push(teddyChoosen)
             }
-          }
+        }
 
         // let storedTeddies = JSON.parse(localStorage.getItem('storedTeddies'))
         // console.log(storedTeddies)
@@ -122,35 +122,35 @@ function buildTeddyPage(teddy) {
         //         storedTeddies.push(teddyChoosen)  
         //     }
         //   }    
-   
+
         localStorage.setItem('storedTeddies', JSON.stringify(storedTeddies))
-        
-        if (window.confirm(teddy.name + " " + colorChoosen + ' a bien été ajouté. Souhaitez-vous consulter votre panier ?')) { 
+
+        if (window.confirm(teddy.name + " " + colorChoosen + ' a bien été ajouté. Souhaitez-vous consulter votre panier ?')) {
             window.location.href = "cart.html";
         } else {
             window.location.href = "index.html";
         }
         console.log(storedTeddies)
-        
+
     })
-    return newElt;  
+    return newElt;
 
 }
 
 // custom options
 function customTeddy(teddy) {
     const colors = teddy.colors;
-        console.log(colors)
-        console.log(colors.length)
+    console.log(colors)
+    console.log(colors.length)
     let custom = ``;
-        for(let color of colors){
-        console.log(color) 
+    for (let color of colors) {
+        console.log(color)
         const newOpt = `<option value="${color}">${color}</option>`
-        console.log (newOpt)
-        custom = custom + newOpt;  
-        }
-        
-    return custom;   
+        console.log(newOpt)
+        custom = custom + newOpt;
+    }
+
+    return custom;
 }
 
 fetchTeddy();

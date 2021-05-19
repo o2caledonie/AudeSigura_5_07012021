@@ -15,17 +15,22 @@
     }
 }
 
-.navbar-nav {
-    .nav-link {
-        padding-left: .5em;
-        &:hover{
-            font-weight: 600;
-            text-decoration: underline;
-        }
-        &:focus{
-            text-decoration: none;
-            font-weight: 700;
-            outline-color: $secondary;
+.navbar-collapse {
+    justify-content: flex-end;
+    .navbar-nav {
+        .nav-link {
+            padding-left: .5em;
+            font-weight: 500;
+            &:hover{
+                font-weight: 600;
+                text-decoration: underline;
+            }
+            &:focus{
+                text-decoration: none;
+                font-weight: 700;
+                outline-color: $secondary;
+            }
         }
     }
 }
+
