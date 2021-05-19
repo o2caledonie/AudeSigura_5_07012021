@@ -1,4 +1,4 @@
-//récupération de l'ID de l'ourson de la page
+//Get teddy Id 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get('id');
@@ -38,30 +38,23 @@ function buildTeddyPage(teddy) {
     <h5 class="card-title"><span class="name">${teddy.name}</span></h5>
     <p class="description">${teddy.description}</p>
     <div class="price">Prix : ${(teddy.price / 100).toFixed(2) + " €"}</span></div>
-    <form class="form-group">
-        <div class="custom">
+    <form id="form">
+        <div class="form-group custom">
             <label for ="Choix de couleurs pour ${teddy.name}">Choisissez sa couleur :</label> 
             <select id ="select-color" class="custom-select">${customTeddy(teddy)}</select>
         </div>
+        <div class="form-group quantity">
+            <label for ="Quantité de ${teddy.name}">Quantité :</label>
+            <input class="form-control form-control-numbers" type="number" id="teddy-incart" min="1" max="10" value="1">
+        </div>
+        <button id="add-cart" type="submit" class="btn btn-secondary mt-3">Ajouter au panier</button>
     </form>
-    <form class="form-group">
-        <label for ="Quantité de ${teddy.name}">Quantité :</label>
-        <input class="form-control form-control-numbers" type="number" id="teddy-incart" min="1" max="10" value="1">
-    </form>
-    <button id="add-cart" type="button" class="btn btn-secondary mt-3">Ajouter au panier</button>
     </div>`;
 
-    // let quantity= newElt.querySelector('input')
-    // console.log(quantity)
-    // quantity.addEventListener('change', function (event) {
-    //     event.preventDefault();
-    // })
-
-
-    // Récupération des données et envoi au panier
-    const button = newElt.querySelector("#add-cart")
-    console.log(button)
-    button.addEventListener("click", function (event) {
+    // Send data to local storage
+    const form = newElt.querySelector("#form")
+    console.log(form)
+    form.addEventListener("submit", function (event) {
         event.preventDefault();
 
         let colorChoosen = newElt.querySelector("#select-color").value
@@ -100,41 +93,15 @@ function buildTeddyPage(teddy) {
                 storedTeddies.push(teddyChoosen)
             }
         }
-
-        // let storedTeddies = JSON.parse(localStorage.getItem('storedTeddies'))
-        // console.log(storedTeddies)
-        // if (storedTeddies == null) {
-        //     // if the cart is empty, we push the first item
-        //     storedTeddies = []
-        //     storedTeddies.push(teddyChoosen)
-        // } else {
-        //     let exist = false;
-        //     for (let storedTeddy of storedTeddies) {
-        //         // if the item is already in the array we increment the quantity by 1
-        //         if (teddyChoosen['teddyColor'] == storedTeddy['teddyColor'] && teddyChoosen['teddyColor'] == storedTeddy['teddyColor']){
-        //             console.log("exists")
-        //             storedTeddy.inCart += 1; 
-        //             exist = true;
-        //         } 
-        //     } 
-        //     if(!exist){
-        //         // if exist is still false, then it means the item is nowhere in the Array, so we add the new item
-        //         storedTeddies.push(teddyChoosen)  
-        //     }
-        //   }    
-
         localStorage.setItem('storedTeddies', JSON.stringify(storedTeddies))
-
         if (window.confirm(teddy.name + " " + colorChoosen + ' a bien été ajouté. Souhaitez-vous consulter votre panier ?')) {
             window.location.href = "cart.html";
         } else {
             window.location.href = "index.html";
         }
         console.log(storedTeddies)
-
     })
     return newElt;
-
 }
 
 // custom options

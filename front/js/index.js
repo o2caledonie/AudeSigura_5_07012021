@@ -1,5 +1,5 @@
 
-// Récupération des données + boucle
+// Get data from api to complete cards-wrapper
 function fetchTeddies() {
     fetch("http://localhost:3000/api/teddies")
         .then(res => {
@@ -26,7 +26,7 @@ function fetchTeddies() {
         });
 }
 
-// Création carte "teddy"
+// Build teddy card
 function buildTeddyCard(teddy) {
     const newElt = document.createElement("div");
     newElt.classList.add("card");

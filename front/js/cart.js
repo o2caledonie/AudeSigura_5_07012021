@@ -54,11 +54,6 @@ function sendData(data) {
         });
 };
 
-// send cart total price to localStorage
-// localStorage.setItem('updatePrice', updatePrice);
-// const cartTotalPrice = localStorage.getItem('updatePrice');
-// console.log(cartTotalPrice);
-
 // Cart setUp
 const cart = document.getElementById('cart');
 const cartTitle = document.createElement('h5');
@@ -266,6 +261,7 @@ if (storedTeddies == null || storedTeddies.length === 0) {
         } else {
             alert("Aucun chiffre ou symbole n'est autorisé.")
             event.preventDefault()
+            firstName.value = ""
         }
     });
 
@@ -274,6 +270,7 @@ if (storedTeddies == null || storedTeddies.length === 0) {
         } else {
             alert("Aucun chiffre ou symbole n'est autorisé.")
             event.preventDefault()
+            lastName.value = ""
         }
     });
 
@@ -282,6 +279,7 @@ if (storedTeddies == null || storedTeddies.length === 0) {
         } else {
             alert("Aucun chiffre ou symbole n'est autorisé.")
             event.preventDefault()
+            city.value = ""
         }
     });
 
@@ -295,6 +293,7 @@ if (storedTeddies == null || storedTeddies.length === 0) {
         } else {
             alert("Aucun symbole n'est autorisé.")
             event.preventDefault()
+            address.value = ""
         }
     });
 
@@ -308,6 +307,7 @@ if (storedTeddies == null || storedTeddies.length === 0) {
         } else {
             alert("Veuillez saisir une adresse mail valide (exemple : user@mail.com).")
             event.preventDefault()
+            email.value = ""
         }
     });
 
@@ -324,7 +324,8 @@ if (storedTeddies == null || storedTeddies.length === 0) {
     submit.textContent = "Valider ma commande";
 
     // Action : if form is valid
-    submit.addEventListener("click", function (event) {
+    contactForm.addEventListener("submit", function (event) {
+        event.preventDefault();
         if (
             isValid(firstName.value) &&
             isValid(lastName.value) &&
@@ -332,7 +333,7 @@ if (storedTeddies == null || storedTeddies.length === 0) {
             isValid(city.value) &&
             validEmail(email.value)
         ) {
-            event.preventDefault();
+            
 
             // Create object : "contact" 
             let contact = {
@@ -370,8 +371,6 @@ if (storedTeddies == null || storedTeddies.length === 0) {
             sendData(send);
 
         }
-
-
     });
 
 }
