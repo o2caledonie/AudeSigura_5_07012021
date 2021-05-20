@@ -310,7 +310,7 @@ if (storedTeddies == null || storedTeddies.length === 0) {
             }
             console.log(products);
 
-            // Create object : "contact" + "products"
+            // Create object "send" = "contact" + "products"
 
             let send = {
                 contact,
@@ -362,8 +362,8 @@ function sendData(data) {
             let total = products.reduce(reducer, 0)
             console.log(total)
             localStorage.setItem('totalCartPrice', total)
-            // localStorage.removeItem('storedTeddies')
-            // window.location = 'order.html'
+            localStorage.removeItem('storedTeddies')
+            window.location = 'order.html'
         })
 
         .catch(error => {
