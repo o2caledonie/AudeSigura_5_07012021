@@ -90,7 +90,7 @@ function handleAddToCart(newElt, teddy) {
         let exist = false;
         for (let storedTeddy of storedTeddies) {
             // if the item is already in the array we update the quantity
-            if (teddyChoosen['teddyColor'] == storedTeddy['teddyColor'] && teddyChoosen['teddyColor'] == storedTeddy['teddyColor']) {
+            if (teddyChoosen['teddyName'] == storedTeddy['teddyName'] && teddyChoosen['teddyColor'] == storedTeddy['teddyColor']) {
                 console.log("exists")
                 console.log(storedTeddy['inCart'])
                 console.log(storedTeddy)
