@@ -51,57 +51,61 @@ function buildTeddyPage(teddy) {
     </form>
     </div>`;
 
-    // Send data to local storage
+    // Submit form
     const form = newElt.querySelector("#form")
     console.log(form)
     form.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        let colorChoosen = newElt.querySelector("#select-color").value
-        console.log(colorChoosen)
-        let quantityChoosen = newElt.querySelector('input').value
-        let teddyChoosen = {
-            teddyName: teddy.name,
-            teddyId: teddy._id,
-            teddyColor: colorChoosen,
-            teddyPrice: teddy.price,
-            inCart: quantityChoosen,
-        };
-        console.log(teddyChoosen);
-
-        let storedTeddies = JSON.parse(localStorage.getItem('storedTeddies'))
-        console.log(storedTeddies)
-        if (storedTeddies == null) {
-            storedTeddies = []
-            // if the cart is empty, we push the first item
-            storedTeddies.push(teddyChoosen)
-        } else {
-            let exist = false;
-            for (let storedTeddy of storedTeddies) {
-                // if the item is already in the array we update the quantity
-                if (teddyChoosen['teddyColor'] == storedTeddy['teddyColor'] && teddyChoosen['teddyColor'] == storedTeddy['teddyColor']) {
-                    console.log("exists")
-                    console.log(storedTeddy['inCart'])
-                    console.log(storedTeddy)
-                    storedTeddy.inCart = quantityChoosen
-                    console.log(storedTeddy)
-                    exist = true;
-                }
-            }
-            if (!exist) {
-                // if exist is still false, then it means the item is nowhere in the Array, so we add the new item
-                storedTeddies.push(teddyChoosen)
-            }
-        }
-        localStorage.setItem('storedTeddies', JSON.stringify(storedTeddies))
-        if (window.confirm(teddy.name + " " + colorChoosen + ' a bien été ajouté. Souhaitez-vous consulter votre panier ?')) {
+        event.preventDefault()
+        let teddyChoosen = handleAddToCart(newElt, teddy)
+        if (window.confirm(teddyChoosen.teddyName + " " + teddyChoosen.teddyColor + ' a bien été ajouté. Souhaitez-vous consulter votre panier ?')) {
             window.location.href = "cart.html";
         } else {
             window.location.href = "index.html";
         }
-        console.log(storedTeddies)
     })
     return newElt;
+}
+
+// Send data to local storage
+function handleAddToCart(newElt, teddy) {
+    let colorChoosen = newElt.querySelector("#select-color").value
+    console.log(colorChoosen)
+    let quantityChoosen = parseInt(newElt.querySelector('input').value)
+    let teddyChoosen = {
+        teddyName: teddy.name,
+        teddyId: teddy._id,
+        teddyColor: colorChoosen,
+        teddyPrice: teddy.price,
+        inCart: quantityChoosen,
+    };
+    console.log(teddyChoosen);
+
+    let storedTeddies = JSON.parse(localStorage.getItem('storedTeddies'))
+    console.log(storedTeddies)
+    if (storedTeddies == null) {
+        storedTeddies = []
+        // if the cart is empty, we push the first item
+        storedTeddies.push(teddyChoosen)
+    } else {
+        let exist = false;
+        for (let storedTeddy of storedTeddies) {
+            // if the item is already in the array we update the quantity
+            if (teddyChoosen['teddyColor'] == storedTeddy['teddyColor'] && teddyChoosen['teddyColor'] == storedTeddy['teddyColor']) {
+                console.log("exists")
+                console.log(storedTeddy['inCart'])
+                console.log(storedTeddy)
+                storedTeddy.inCart = quantityChoosen
+                console.log(storedTeddy)
+                exist = true;
+            }
+        }
+        if (!exist) {
+            // if exist is still false, then it means the item is nowhere in the Array, so we add the new item
+            storedTeddies.push(teddyChoosen)
+        }
+    }
+    localStorage.setItem('storedTeddies', JSON.stringify(storedTeddies))
+    return teddyChoosen
 }
 
 // custom options

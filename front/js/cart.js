@@ -3,56 +3,7 @@
 let storedTeddies = JSON.parse(localStorage.getItem('storedTeddies'))
 console.log(storedTeddies)
 
-// Send data to server
-function sendData(data) {
-    fetch("http://localhost:3000/api/teddies/order", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
 
-        body: JSON.stringify(data),
-
-    })
-
-        .then(res => {
-            console.log(res)
-
-            if (!res.ok) {
-                throw Error("ERROR");
-            }
-            return res.json();
-        })
-
-        .then(resOrder => {
-            console.log(resOrder)
-            console.log(resOrder.orderId)
-            localStorage.setItem('resOrder', resOrder.orderId)
-            console.log(resOrder)
-
-            let products = resOrder.products
-            // let total = 0
-            // for (product of products){
-            //     console.log(product.price)
-            //     total = total + product.price
-            // }
-            // console.log(total)
-            let reducer = function (total, product) {
-                return total + product.price
-            }
-            let total = products.reduce(reducer, 0)
-            console.log(total)
-            localStorage.setItem('totalCartPrice', total)
-            localStorage.removeItem('storedTeddies')
-            window.location = 'order.html'
-        })
-
-        .catch(error => {
-            console.log(error);
-            document.getElementById('erreur').innerHTML = "Erreur lors de l'envoi des données au serveur :("
-
-        });
-};
 
 // Cart setUp
 const cart = document.getElementById('cart');
@@ -89,8 +40,6 @@ if (storedTeddies == null || storedTeddies.length === 0) {
         // teddyDetails.innerHTML = `<input class="form-control form-control-numbers" type="number" id="teddy-incart" min="1" max="10" value="${storedTeddy.inCart}">${storedTeddy.teddyName}, ${storedTeddy.teddyColor}`
         teddyDetails.textContent = storedTeddy.inCart + "   " + storedTeddy.teddyName + " , " + storedTeddy.teddyColor;
 
-
-
         const teddyPrice = document.createElement('div');
         teddyItem.appendChild(teddyPrice);
         teddyPrice.id = teddy++;
@@ -103,13 +52,13 @@ if (storedTeddies == null || storedTeddies.length === 0) {
         trashTeddy.className = 'btn btn-trash-teddy';
         trashTeddy.type = 'button';
         trashTeddy.title = 'Supprimer cet ourson ?';
-        trashTeddy.innerHTML = `<i class="fas fa-trash-alt" aria-hidden="true"></i>`;
+        trashTeddy.innerHTML = `<i class="fa fa-trash" aria-hidden="true"></i>`;
 
         // Action : trash teddy      
         trashTeddy.addEventListener("click", function (event) {
             event.preventDefault();
-            let id = this.closest('.teddy-price').id;
-            storedTeddies.splice(id, 1);
+            let teddyToTrash = this.closest('.teddy-price').id;
+            storedTeddies.splice(teddyToTrash, 1);
 
             //Update localStorage
             localStorage.setItem('storedTeddies', JSON.stringify(storedTeddies));
@@ -128,7 +77,7 @@ if (storedTeddies == null || storedTeddies.length === 0) {
         console.log(arrayPrice)
     }
 
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    let reducer = (accumulator, currentValue) => accumulator + currentValue;
     const updatePrice = arrayPrice.reduce(reducer, 0);
     console.log(updatePrice);
 
@@ -255,6 +204,7 @@ if (storedTeddies == null || storedTeddies.length === 0) {
     function isValid(value) {
         return /^[a-zA-Z '.-]*$/.test(value);
     };
+    
 
     firstName.addEventListener('change', function (event) {
         if (isValid(firstName.value)) {
@@ -333,7 +283,7 @@ if (storedTeddies == null || storedTeddies.length === 0) {
             isValid(city.value) &&
             validEmail(email.value)
         ) {
-            
+
 
             // Create object : "contact" 
             let contact = {
@@ -374,3 +324,51 @@ if (storedTeddies == null || storedTeddies.length === 0) {
     });
 
 }
+
+// Send data to server
+function sendData(data) {
+    fetch("http://localhost:3000/api/teddies/order", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+
+    })
+        .then(res => {
+            console.log(res)
+
+            if (!res.ok) {
+                throw Error("ERROR");
+            }
+            return res.json();
+        })
+        .then(resOrder => {
+            console.log(resOrder)
+            console.log(resOrder.orderId)
+            localStorage.setItem('resOrder', resOrder.orderId)
+            console.log(resOrder)
+
+            let products = resOrder.products
+            // let total = 0
+            // for (product of products){
+            //     console.log(product.price)
+            //     total = total + product.price
+            // }
+            // console.log(total)
+            let reducer = function (total, product) {
+                return total + product.price
+            }
+            let total = products.reduce(reducer, 0)
+            console.log(total)
+            localStorage.setItem('totalCartPrice', total)
+            // localStorage.removeItem('storedTeddies')
+            // window.location = 'order.html'
+        })
+
+        .catch(error => {
+            console.log(error);
+            document.getElementById('erreur').innerHTML = "Erreur lors de l'envoi des données au serveur :("
+
+        });
+};
