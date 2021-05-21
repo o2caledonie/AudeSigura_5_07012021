@@ -14,7 +14,6 @@ function fetchTeddy() {
             }
             return res.json();
         })
-
         .then(teddy => {
             console.log(teddy);
             let newElt = buildTeddyPage(teddy);
@@ -22,7 +21,6 @@ function fetchTeddy() {
             let elt = document.getElementById('teddy');
             elt.appendChild(newElt);
         })
-
         .catch(error => {
             console.log(error);
             document.getElementById('erreur').innerHTML = "Erreur lors de la récupération des données :("
@@ -120,7 +118,6 @@ function customTeddy(teddy) {
         console.log(newOpt)
         custom = custom + newOpt;
     }
-
     return custom;
 }
 

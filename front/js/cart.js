@@ -3,8 +3,6 @@
 let storedTeddies = JSON.parse(localStorage.getItem('storedTeddies'))
 console.log(storedTeddies)
 
-
-
 // Cart setUp
 const cart = document.getElementById('cart');
 const cartTitle = document.createElement('h5');
@@ -17,7 +15,6 @@ cart.appendChild(teddiesList);
 teddiesList.id = 'teddies-list';
 teddiesList.className = 'col-11 col-md-6 col-lg-4'
 
-
 if (storedTeddies == null || storedTeddies.length === 0) {
     // if cart is empty
     const noTeddies = document.createElement('p');
@@ -25,7 +22,14 @@ if (storedTeddies == null || storedTeddies.length === 0) {
     noTeddies.className = 'no-teddies';
     noTeddies.textContent = "Mon panier est vide ...";
 } else {
-    // Show teddies items
+    displayTeddiesItems()
+    displayTotalPrice()
+    emptyCart()
+    displayContactForm()
+}
+
+// Display teddies items
+function displayTeddiesItems() {
     let teddy = 0;
     for (storedTeddy of storedTeddies) {
         const teddyItem = document.createElement('div');
@@ -37,7 +41,6 @@ if (storedTeddies == null || storedTeddies.length === 0) {
         teddyItem.appendChild(teddyDetails);
         teddyDetails.className = "teddy-details";
         teddyDetails.setAttribute('href', teddyLink);
-        // teddyDetails.innerHTML = `<input class="form-control form-control-numbers" type="number" id="teddy-incart" min="1" max="10" value="${storedTeddy.inCart}">${storedTeddy.teddyName}, ${storedTeddy.teddyColor}`
         teddyDetails.textContent = storedTeddy.inCart + "   " + storedTeddy.teddyName + " , " + storedTeddy.teddyColor;
 
         const teddyPrice = document.createElement('div');
@@ -68,15 +71,16 @@ if (storedTeddies == null || storedTeddies.length === 0) {
             window.location.href = "cart.html";
         });
     }
+}
 
-    // Display total price
+// Display total price
+function displayTotalPrice() {
     let arrayPrice = []
     for (storedTeddy of storedTeddies) {
         let item = (storedTeddy.teddyPrice * storedTeddy.inCart) / 100;
         arrayPrice.push(item);
         console.log(arrayPrice)
     }
-
     let reducer = (accumulator, currentValue) => accumulator + currentValue;
     const updatePrice = arrayPrice.reduce(reducer, 0);
     console.log(updatePrice);
@@ -86,15 +90,16 @@ if (storedTeddies == null || storedTeddies.length === 0) {
     totalPrice.id = 'total-price';
     totalPrice.className = 'text-center my-2';
     totalPrice.innerHTML = `Montant total = ${updatePrice} €`;
+}
 
-
-    // Set "empty-cart" button
+// Set "empty-cart" button
+function emptyCart() {
     const emptyCart = document.createElement('button');
     cart.appendChild(emptyCart);
     emptyCart.className = 'col-9 btn btn-primary my-2';
     emptyCart.setAttribute('type', 'button');
     emptyCart.title = 'Vider le panier';
-    emptyCart.innerHTML = `Vider mon panier <i class="fas fa-trash-alt" aria-hidden="true"></i>`;
+    emptyCart.innerHTML = `Vider mon panier <i class="fa fa-trash" aria-hidden="true"></i>`;
 
     // Action : empty cart
     emptyCart.addEventListener("click", function (event) {
@@ -103,8 +108,10 @@ if (storedTeddies == null || storedTeddies.length === 0) {
         alert('Votre panier a bien été vidé !')
         window.location.href = "cart.html";
     });
+}
 
-    // Set contact form
+// Set contact form
+function displayContactForm() {
     const contactForm = document.createElement('form');
     cart.appendChild(contactForm);
     contactForm.id = 'contact';
@@ -128,6 +135,16 @@ if (storedTeddies == null || storedTeddies.length === 0) {
     firstName.id = "first-name"
     firstName.required = true;
 
+    // Validity check : first-name
+    firstName.addEventListener('change', function (event) {
+        if (isValid(firstName.value)) {
+        } else {
+            alert("Aucun chiffre ou symbole n'est autorisé.")
+            event.preventDefault()
+            firstName.value = ""
+        }
+    });
+
     // Set last-name field
     const divLastName = document.createElement('div');
     contactForm.appendChild(divLastName);
@@ -145,6 +162,16 @@ if (storedTeddies == null || storedTeddies.length === 0) {
     lastName.setAttribute('class', 'form-control');
     lastName.id = "last-name"
     lastName.required = true;
+
+    // Validity check : last-name
+    lastName.addEventListener('change', function (event) {
+        if (isValid(lastName.value)) {
+        } else {
+            alert("Aucun chiffre ou symbole n'est autorisé.")
+            event.preventDefault()
+            lastName.value = ""
+        }
+    });
 
     // Set address field
     const divAddress = document.createElement('div');
@@ -164,6 +191,16 @@ if (storedTeddies == null || storedTeddies.length === 0) {
     address.id = "address"
     address.required = true;
 
+    // Validity check : post address
+    address.addEventListener('change', function (event) {
+        if (validAddress(address.value)) {
+        } else {
+            alert("Aucun symbole n'est autorisé.")
+            event.preventDefault()
+            address.value = ""
+        }
+    });
+
     // Set city field
     const divCity = document.createElement('div');
     contactForm.appendChild(divCity);
@@ -181,6 +218,16 @@ if (storedTeddies == null || storedTeddies.length === 0) {
     city.setAttribute('class', 'form-control');
     city.id = "city"
     city.required = true;
+
+    // Validity check : city
+    city.addEventListener('change', function (event) {
+        if (isValid(city.value)) {
+        } else {
+            alert("Aucun chiffre ou symbole n'est autorisé.")
+            event.preventDefault()
+            city.value = ""
+        }
+    });
 
     // Set email field
     const divEmail = document.createElement('div');
@@ -200,58 +247,7 @@ if (storedTeddies == null || storedTeddies.length === 0) {
     email.id = "email"
     email.required = true;
 
-    // Validity check : first-name, last-name, city
-    function isValid(value) {
-        return /^[a-zA-Z '.-]*$/.test(value);
-    };
-    
-
-    firstName.addEventListener('change', function (event) {
-        if (isValid(firstName.value)) {
-        } else {
-            alert("Aucun chiffre ou symbole n'est autorisé.")
-            event.preventDefault()
-            firstName.value = ""
-        }
-    });
-
-    lastName.addEventListener('change', function (event) {
-        if (isValid(lastName.value)) {
-        } else {
-            alert("Aucun chiffre ou symbole n'est autorisé.")
-            event.preventDefault()
-            lastName.value = ""
-        }
-    });
-
-    city.addEventListener('change', function (event) {
-        if (isValid(city.value)) {
-        } else {
-            alert("Aucun chiffre ou symbole n'est autorisé.")
-            event.preventDefault()
-            city.value = ""
-        }
-    });
-
-    // Validity check : post address
-    function validAddress(value) {
-        return /^[A-Z-a-z-0-9\s]{5,80}$/.test(value)
-    };
-
-    address.addEventListener('change', function (event) {
-        if (validAddress(address.value)) {
-        } else {
-            alert("Aucun symbole n'est autorisé.")
-            event.preventDefault()
-            address.value = ""
-        }
-    });
-
     // Validity check : email
-    function validEmail(value) {
-        return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value);
-    };
-
     email.addEventListener('change', function (event) {
         if (validEmail(email.value)) {
         } else {
@@ -273,56 +269,75 @@ if (storedTeddies == null || storedTeddies.length === 0) {
     submit.id = 'valid';
     submit.textContent = "Valider ma commande";
 
-    // Action : if form is valid
+    // Prepare data to be sent
     contactForm.addEventListener("submit", function (event) {
         event.preventDefault();
-        if (
-            isValid(firstName.value) &&
-            isValid(lastName.value) &&
-            validAddress(address.value) &&
-            isValid(city.value) &&
-            validEmail(email.value)
-        ) {
-
-
-            // Create object : "contact" 
-            let contact = {
-                firstName: firstName.value,
-                lastName: lastName.value,
-                address: address.value,
-                city: city.value,
-                email: email.value,
-            }
-            console.log(contact);
-
-            // Create object : "products" 
-            let products = [];
-            for (storedTeddy of storedTeddies) {
-                let itemsId = storedTeddy.teddyId;
-                console.log(itemsId);
-                let itemsNb = storedTeddy.inCart;
-                console.log(itemsNb)
-                for (let i = 0; i < itemsNb; i++) {
-                    console.log(itemsId)
-                    products.push(itemsId)
-                }
-
-            }
-            console.log(products);
-
-            // Create object "send" = "contact" + "products"
-
-            let send = {
-                contact,
-                products,
-            }
-            console.log(send)
-
-            sendData(send);
-
+        let form = event.currentTarget;
+        if (isFormValid(form) === false) {
+            return;
         }
+        let contact = {
+            firstName: firstName.value,
+            lastName: lastName.value,
+            address: address.value,
+            city: city.value,
+            email: email.value,
+        }
+        let products = createProducts();
+        let send = { contact, products };
+        sendData(send);
     });
+}
 
+// Regex for validation
+function isValid(value) {
+    return /^[a-zA-Z '.-]*$/.test(value);
+};
+
+function validAddress(value) {
+    return /^[A-Z-a-z-0-9\s]{5,80}$/.test(value)
+};
+
+function validEmail(value) {
+    return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value);
+};
+
+// Validate form
+function isFormValid(form) {
+    let firstName = form.querySelector('#first-name');
+    let lastName = form.querySelector('#last-name');
+    let address = form.querySelector('#address');
+    let city = form.querySelector('#city');
+    let email = form.querySelector('#email');
+    if (
+        isValid(firstName.value) &&
+        isValid(lastName.value) &&
+        validAddress(address.value) &&
+        isValid(city.value) &&
+        validEmail(email.value)
+    ) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+// Create object : "products" 
+function createProducts() {
+    let products = [];
+    for (storedTeddy of storedTeddies) {
+        let itemsId = storedTeddy.teddyId;
+        console.log(itemsId);
+        let itemsNb = storedTeddy.inCart;
+        console.log(itemsNb)
+        for (let i = 0; i < itemsNb; i++) {
+            console.log(itemsId)
+            products.push(itemsId)
+        }
+
+    }
+    return products;
 }
 
 // Send data to server
@@ -333,7 +348,6 @@ function sendData(data) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data),
-
     })
         .then(res => {
             console.log(res)
@@ -365,7 +379,6 @@ function sendData(data) {
             localStorage.removeItem('storedTeddies')
             window.location = 'order.html'
         })
-
         .catch(error => {
             console.log(error);
             document.getElementById('erreur').innerHTML = "Erreur lors de l'envoi des données au serveur :("

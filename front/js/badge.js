@@ -10,7 +10,6 @@ function getTeddiesCountInCart() {
         let teddiesCount = parseInt(storedTeddy.inCart);
         teddiesCountInCart = teddiesCountInCart + teddiesCount
     }
-
     console.log(teddiesCountInCart)
     return teddiesCountInCart;
 }
